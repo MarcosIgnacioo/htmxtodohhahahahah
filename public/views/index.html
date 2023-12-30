@@ -1,0 +1,32 @@
+{{ block "index" . }}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <form hx-swap="afterbegin" hx-target=".prueba" hx-post="/htmx/note">
+            <label for="title">Ingresa el titulo</label>
+            <input type="" name="title" value="">
+            <label for="content">Ingresa el contenido</label>
+            <input type="" name="content" value="">
+            <button type="">Crear nota</button>
+        </form>
+        <div class="prueba">
+            {{ range . }}
+                {{ template "note" . }}
+            {{ end }}
+        </div>
+    </body>
+</html>
+{{ end }}
+
+{{ define "popo" }}
+<div class="note">
+    <h1> {{ .Title }} </h1>
+    <h1> {{ .Content }} </h1>
+</div>
+{{end}}

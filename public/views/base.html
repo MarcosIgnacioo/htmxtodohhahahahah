@@ -1,0 +1,15 @@
+{{ block "note" . }}
+<div class="note">
+    <h1>{{ .Title }}</h1>
+    <h1>{{ .Content }}</h1>
+    <input type="checkbox" {{ if .IsDone }} checked {{ end }} name="" value="{{ .IsDone }}">
+    <a href=""> Edit </a>
+    <a href=""> Delete </a>
+</div>
+{{ end }}
+
+{{ block "oob-note" . }}
+<div hx-swap-oob="afterbegin" id="notes">
+    {{ template "note" . }}
+</div>
+{{ end }}

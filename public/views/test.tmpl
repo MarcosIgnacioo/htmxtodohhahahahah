@@ -1,0 +1,13 @@
+<html>
+    {{ template "note" . }}
+</html>
+{{ define "note" }}
+<div class="note">
+    <h1> {{ .Title }} </h1>
+    <h1> {{ .Content }} </h1>
+    <input type="checkbox" {{ if .IsDone }} checked {{ end }} name="" value="">
+    <a href="/notes/id={{ .Id }}">Ver nota</a>
+</div>
+{{end}}
+
+
