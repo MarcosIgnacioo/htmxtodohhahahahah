@@ -18,5 +18,5 @@ func ViewNote(c *gin.Context)  {
 
     var note *models.Note
     initializers.DB.First(&note, id)
-    c.HTML(http.StatusOK, "note-details.tmpl", note)
+    c.HTML(http.StatusOK, "note-details.html", note)
 }

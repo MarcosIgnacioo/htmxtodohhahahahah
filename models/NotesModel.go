@@ -7,5 +7,5 @@ type Note struct {
     Id int `gorm:"id"`
     Title   string `gorm:"title"`   
     Content string `gorm:"content"`
-    IsDone  bool   `gorm:"isDone"`
+    IsDone  bool   `gorm:"is_done"`
 }

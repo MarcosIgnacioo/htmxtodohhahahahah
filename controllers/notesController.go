@@ -1,10 +1,7 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
-	"strconv"
-
 	"github.com/MarcosIgnacioo/htmx-go/initializers"
 	"github.com/MarcosIgnacioo/htmx-go/models"
 	"github.com/gin-gonic/gin"
@@ -30,7 +27,7 @@ func PostNote (c *gin.Context) {
 
     body.Title = title
     body.Content = content
-    body.IsDone = false 
+    body.IsDone = false
     
     note := models.Note{ Title: body.Title, Content: body.Content, IsDone: body.IsDone }
 
@@ -78,20 +75,10 @@ func GetNote(c *gin.Context) {
 
 
 func UpdateNote(c *gin.Context)  {
-    fmt.Println("WEPPPPPPPPPPPPPPPPPPPPP")
-    title := c.PostForm("title") 
-    content := c.PostForm("content") 
-    isDone, _ := strconv.ParseBool(c.PostForm("isDone"))
-
-    // var body struct {
-    //     Title string `json:"title"` 
-    //     Content string `json:"content"`
-    //     IsDone bool `json:"isDone"`
-    // }
-
-    // c.Bind(&body)
-
-
+    title := c.Request.PostFormValue("title")
+    content := c.Request.PostFormValue("content")
+    // isDone, _ := strconv.ParseBool(c.Request.FormValue("isDone"))
+    
 
     var note  models.Note
     id := c.Param("id")
@@ -99,16 +86,14 @@ func UpdateNote(c *gin.Context)  {
     initializers.DB.Model(&note).Updates(models.Note {
         Title: title,
         Content: content,
-        IsDone: isDone,
+        IsDone: false,
     })
 
-    fmt.Println("WEPPPPPPPPPPPPPPPPPPPPP2")
     initializers.DB.Save(note)
 
-    c.JSON(200, gin.H{
-        "message": note,
-    })
-
+    //c.HTML(http.StatusOK, "note-details.html", note)
+    c.Redirect(http.StatusSeeOther,"/")
+    //c.JSON(200, note)
 }
 
 func DeleteNote(c *gin.Context)  {

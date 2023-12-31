@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <form class="note" hx-put="/htmx/notes/{{ .Id }}">
+            <label for="title">Title: </label>
+            <input type="text" name="title"  id="inp" value="{{ .Title }}">
+            <label for="content">Content: </label>
+            <input type="text" name="content" id="inp2" value="{{ .Content }} ">
+            <label for="isDone">Is Done?: </label>
+            <input id="isDone" type="checkbox" {{ if .IsDone }} checked {{ end }} name="isDone">
+            <button  type="submit" style="cursor: pointer; background-color: red;">Update</button>
+        </form>
+        <button  hx-delete="/htmx/notes/{{ .Id }}" style="cursor: pointer; background-color: red;">Delete</button>
+    </body>
+    <script>
+        const checkBox = document.querySelector('#isDone')
+
+        checkBox.addEventListener('click', () => {
+            checkBox.value = checkBox.checked
+            console.log('Checkbox value:', checkBox.value);
+        })
+    </script>
+</html>

@@ -5,8 +5,8 @@
 <div class="note">
     <h1> {{ .Title }} </h1>
     <h1> {{ .Content }} </h1>
-    <input type="checkbox" {{ if .IsDone }} checked {{ end }} name="" value="">
-    <a href="/notes/id={{ .Id }}">Ver nota</a>
+    <input type="checkbox" {{ if .IsDone }} checked {{ end }} name="" value="{{ .IsDone }}">
+    <a href="/notes/id={{ .Id }}">Ver</a>
 </div>
 {{end}}
 
